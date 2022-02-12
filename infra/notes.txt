@@ -31,3 +31,4 @@ docker ps => kubectl get pods
 
 docker exec -it <container id> => kubectl exec -it [pod_name][cmd]
 
+we use deployments to create pods, we do not deploy pods manually because it can easily update version imagws of pods or restart pods when they are down

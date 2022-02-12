@@ -14,4 +14,4 @@ spec:
     spec:
       containers: # '-' is array in yaml
         - name: posts
-          image: ercecan/posts:0.0.1
+          image: ercecan/posts:latest # if version empty also assumed latest
