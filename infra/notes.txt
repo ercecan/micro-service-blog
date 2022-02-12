@@ -1,0 +1,5 @@
+kubectl apply -f posts.yaml
+=> this command will create a pod using the yaml file in k8s dir
+
+kubectl get posts 
+=> this command will return the running pods inside the cluster
