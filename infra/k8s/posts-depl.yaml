@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1 # num of pods running a particular image
+  selector:
+    matchLabels: # find all pods with label app: posts
+      app: posts
+  template: # specify exact config of a pod
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers: # '-' is array in yaml
+        - name: posts
+          image: ercecan/posts:0.0.1
