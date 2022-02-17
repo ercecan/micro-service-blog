@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1 # num of pods running a particular image
+  selector:
+    matchLabels: # find all pods with label app: client
+      app: client
+  template: # specify exact config of a pod
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers: # '-' is array in yaml
+        - name: client
+          image: ercecan/client:latest # if version empty also assumed latest
+--- # to create multiple objects inside of a single yaml file we add ---
+apiVersion: v1
+kind: Service # clusterIP service
+metadata:
+  name: client-srv
+spec:
+  selector:
+    app: client
+  type: ClusterIP # optional, kubernetes is default to create ClusterIP service
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
