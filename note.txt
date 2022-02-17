@@ -1,0 +1,12 @@
+load balancer is just about getting traffic into cluster
+and ingress controller will adjust the routing of traffic insşde the cluster 
+
+
+In /etc/hosts we added line:
+127.0.0.1 posts.com
+|
+with that line every request sent to posts.com will be directed to 127.0.0.1
+that request is going to ingress-srv and nginx is gonna think we are trying to visit posts.com and will apply the routing roules in ingress-srv.yaml
+
+
+
