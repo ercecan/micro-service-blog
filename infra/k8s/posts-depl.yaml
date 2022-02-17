@@ -19,7 +19,7 @@ spec:
 apiVersion: v1
 kind: Service # clusterIP service
 metadata:
-  name: psots-clusterip-srv
+  name: posts-clusterip-srv
 spec:
   selector:
     app: posts
