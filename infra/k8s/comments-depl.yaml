@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-depl
+spec:
+  replicas: 1 # num of pods running a particular image
+  selector:
+    matchLabels: # find all pods with label app: comments
+      app: comments
+  template: # specify exact config of a pod
+    metadata:
+      labels:
+        app: comments
+    spec:
+      containers: # '-' is array in yaml
+        - name: comments
+          image: ercecan/comments:latest # if version empty also assumed latest
+--- # to create multiple objects inside of a single yaml file we add ---
+apiVersion: v1
+kind: Service # clusterIP service
+metadata:
+  name: comments-srv
+spec:
+  selector:
+    app: comments
+  type: ClusterIP # optional, kubernetes is default to create ClusterIP service
+  ports:
+    - name: comments
+      protocol: TCP
+      port: 4001
+      targetPort: 4001

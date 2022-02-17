@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1 # num of pods running a particular image
+  selector:
+    matchLabels: # find all pods with label app: moderation
+      app: moderation
+  template: # specify exact config of a pod
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers: # '-' is array in yaml
+        - name: moderation
+          image: ercecan/moderation:latest # if version empty also assumed latest
+--- # to create multiple objects inside of a single yaml file we add ---
+apiVersion: v1
+kind: Service # clusterIP service
+metadata:
+  name: moderation-srv
+spec:
+  selector:
+    app: moderation
+  type: ClusterIP # optional, kubernetes is default to create ClusterIP service
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003
+      targetPort: 4003
