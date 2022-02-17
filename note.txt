@@ -8,5 +8,9 @@ In /etc/hosts we added line:
 with that line every request sent to posts.com will be directed to 127.0.0.1
 that request is going to ingress-srv and nginx is gonna think we are trying to visit posts.com and will apply the routing roules in ingress-srv.yaml
 
+Skaffold detects changes in code and copies them straight to the container
+and since the scripts in the container are run with nodemon
+with every change the scripts are restarted automatically
+without nodemon nod won't restart you definitely need nodemon or something like that
 
-
+Quitting skaffold will close all deployments, services and pods. With that we dont have to keep them open or close them one by one.

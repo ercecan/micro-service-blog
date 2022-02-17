@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/* # telling skaffold watch all the yaml files in dir k8s, it will automatically update yaml files
+build:
+  local:
+    push: false
+  artifacts:
+    - image: ercecan/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.js" # if a change is made it will copy it directly into the pod
+            dest: .
+    - image: ercecan/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if a change is made it will copy it directly into the pod
+            dest: .
+    - image: ercecan/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if a change is made it will copy it directly into the pod
+            dest: .
+    - image: ercecan/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if a change is made it will copy it directly into the pod
+            dest: .
+    - image: ercecan/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if a change is made it will copy it directly into the pod
+            dest: .
+    - image: ercecan/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if a change is made it will copy it directly into the pod
+            dest: .
